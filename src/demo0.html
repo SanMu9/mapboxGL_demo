@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='../lib/mapbox-gl.js'></script>
+    <link href='../lib/mapbox-gl.css' rel='stylesheet' />
+    <title></title>
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<div id='map'></div>
+<script>
+// mapboxgl.accessToken = 'pk.eyJ1Ijoic2FubXU5IiwiYSI6ImNqdXh3ZHBjaDBkaGo0NHBnN2ppM2xycTEifQ.s6H7Hmy5r_p8JJmsxnE2jQ';
+var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: {
+        "version": 8,
+        "name": "Mapbox Streets",
+        // "sprite": "mapbox://sprites/mapbox/streets-v8",
+        "sprite": "http://127.0.0.1:5500/src/sprite/sprite",//sprite本地化，路径名要写全
+        // "sprite": "http://172.26.1.188:8082/src/sprite/sprite",//sprite本地化，路径名要写全
+
+
+        // "glyphs": "../src/font/{fontstack}/{range}.pbf",
+        // "glyphs": "http://172.26.1.188:8082/src/font/{fontstack}/{range}.pbf",
+
+        "glyphs": "http://127.0.0.1:5500/src/font/{fontstack}/{range}.pbf",
+
+        "sources": {
+            "osm-tiles": {
+                "type": "raster",
+                'tiles': [
+                    'http://c.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                ],
+                'tileSize': 256
+            }
+        },
+        "layers": [{
+            "id": "simple-tiles",
+            "type": "raster",
+            "source": "osm-tiles",
+            "minzoom": 0,
+            "maxzoom": 20
+        }]
+        
+        // "layers": [...]
+    },
+    center: [-74.50, 40], // starting position
+    zoom: 3 // starting zoom
+});
+
+map.on('load',function(){
+// 添加数据源
+
+        map.addLayer({
+            "id": "points",
+            "type": "symbol",
+            "source": {
+                "type": "geojson",
+                "data": {
+                    "type": "FeatureCollection",
+                        "features": [{
+                        "type": "Feature",
+                        "geometry": {
+                        "type": "Point",
+                        "coordinates": [-77.03238901390978, 38.913188059745586]
+                            },
+                        "properties": {
+                            "title": "Mapbox DC",
+                            "icon": "monument"
+                        }
+                    }, 
+                    {
+                        "type": "Feature",
+                            "geometry": {
+                            "type": "Point",
+                            "coordinates": [-122.414, 37.776]
+                        },
+                        "properties": {
+                            "title": "Mapbox SF",
+                            "icon": "harbor"
+                        }
+                    }]
+                }
+            },
+            "layout": {
+                "icon-image": "{icon}-15",
+                "text-field": "{title}",
+                "text-font": ["Open Sans Regular"],//字体文件名
+                "text-offset": [0, 0.6],
+                "text-anchor": "top"
+            }
+        });
+})
+
+
+</script>
+
+</body>
+</html>
