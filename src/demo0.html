@@ -60,10 +60,9 @@ var map = new mapboxgl.Map({
                     //获取GeoServer 矢量切片服务,可以是一下几种方式
                     // "http://localhost:8088/geoserver/gwc/service/tms/1.0.0/china:china_map@EPSG:900913@pbf/{z}/{x}/{y}.pbf",
 
-                    // 'http://localhost:8085/geoserver/gwc/service/tms/1.0.0/' + '\
-                    // china%3Achina_map@EPSG%3A900913@pbf/{z}/{x}/{y}.pbf',
+                    // 'http://localhost:8088/geoserver/gwc/service/tms/1.0.0/china%3Achina_map@EPSG%3A900913@pbf/{z}/{x}/{y}.pbf'
 
-                    "http://127.0.0.1:5500/maptile/{z}/{x}/{y}.pbf"
+                    "http://127.0.0.1:5500/maptile/{z}/{x}/{y}.pbf"  
                     // "http://127.0.0.1:8088/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=china:china_map&STYLE=&TILEMATRIX=EPSG:900913:{z}&TILEMATRIXSET=EPSG:900913&FORMAT=application/x-protobuf;type=mapbox-vector&TILECOL={x}&TILEROW={y}"
                 ]
             }
